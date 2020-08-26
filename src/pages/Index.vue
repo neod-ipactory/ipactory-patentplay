@@ -1,15 +1,12 @@
 <template>
   <div id="index">
-    <!-- <div class="border top"></div> -->
     <div class="container">
       <img src="/images/서울과기대.jpg" alt="서울과기대 로고" />
       <div class="codeContainer">
         <input type="text" placeholder="Enter Connection Code" />
         <button>Connect</button>
       </div>
-      <!-- <div class="textContainer"><h1>PATENT PLAY</h1></div> -->
     </div>
-    <!-- <div class="border bottom"></div> -->
   </div>
 </template>
 
@@ -19,22 +16,12 @@ export default {};
 
 <style lang="scss">
 #index {
-  position: relative;
-  height: 100vh;
-
   .container {
     width: 500px;
     margin: 10% auto 0;
 
     img {
       width: 500px;
-    }
-
-    h1 {
-      margin-top: 10%;
-      text-align: center;
-      font-size: 30px;
-      color: white;
     }
 
     .codeContainer {
@@ -60,32 +47,10 @@ export default {};
         width: 90%;
         height: 35%;
         border-radius: 5px;
-        background-color: #007bff;
+        background-color: #263238;
         color: white;
         font-size: 20px;
       }
-    }
-
-    /* .textContainer {
-      width: 60%;
-      margin: 0 auto; 
-      background-color: black;
-    } */
-  }
-
-  .border {
-    &.top {
-      width: 100%;
-      height: 150px;
-      /* background-color: #141b2e; */
-    }
-
-    &.bottom {
-      width: 100%;
-      height: 150px;
-      /* background-color: #141b2e; */
-      position: absolute;
-      bottom: 0;
     }
   }
 }
