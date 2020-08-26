@@ -2,7 +2,6 @@
   <div id="index">
     <div class="container">
       <img src="/images/서울과기대.jpg" alt="서울과기대 로고" />
-      <h1>Patent Play</h1>
       <div class="codeContainer">
         <input type="text" placeholder="Enter Connection Code" />
         <button>Connect</button>
@@ -23,11 +22,6 @@ export default {};
 
     img {
       width: 500px;
-    }
-
-    h1 {
-      margin-top: 10%;
-      text-align: center;
     }
 
     .codeContainer {
@@ -53,7 +47,7 @@ export default {};
         width: 90%;
         height: 35%;
         border-radius: 5px;
-        background-color: #007bff;
+        background-color: #263238;
         color: white;
         font-size: 20px;
       }
