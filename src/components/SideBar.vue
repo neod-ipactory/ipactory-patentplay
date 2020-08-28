@@ -39,69 +39,65 @@
     </div>
     <!-- /main navbar -->
 
-    <!-- Page content -->
-    <div class="page-content">
-      <!-- Main sidebar -->
-      <div class="sidebar sidebar-dark sidebar-main sidebar-expand-md">
-        <!-- Sidebar mobile toggler -->
-        <div class="sidebar-mobile-toggler text-center">
-          <a href="#" class="sidebar-mobile-main-toggle">
-            <i class="icon-arrow-left8"></i>
-          </a>
-          Navigation
-          <a href="#" class="sidebar-mobile-expand">
-            <i class="icon-screen-full"></i>
-            <i class="icon-screen-normal"></i>
-          </a>
-        </div>
-        <!-- /sidebar mobile toggler -->
-
-        <!-- Sidebar content -->
-        <div class="sidebar-content">
-          <!-- Main navigation -->
-          <div class="card card-sidebar-mobile">
-            <ul class="nav nav-sidebar" data-nav-type="accordion">
-              <!-- Main -->
-              <li class="nav-item">
-                <a href="index.html" class="nav-link">
-                  <i class="icon-home4"></i>
-                  <span>
-                    Home
-                  </span>
-                </a>
-              </li>
-              <li class="nav-item nav-item-submenu">
-                <a href="#" class="nav-link"><i class="icon-stack"></i> <span>조회</span></a>
-              </li>
-              <li class="nav-item nav-item-submenu">
-                <a href="#" class="nav-link"
-                  ><i class="icon-stack"></i> <span>신규케이스 등록</span></a
-                >
-              </li>
-              <li class="nav-item nav-item-submenu">
-                <a href="#" class="nav-link"
-                  ><i class="icon-stack"></i> <span>학과, 교수관리</span></a
-                >
-              </li>
-              <li class="nav-item nav-item-submenu">
-                <a href="#" class="nav-link"><i class="icon-stack"></i> <span>태그 관리</span></a>
-              </li>
-              <li class="nav-item nav-item-submenu">
-                <a href="#" class="nav-link"
-                  ><i class="icon-stack"></i> <span>기타 코드 관리</span></a
-                >
-              </li>
-
-              <!-- /main -->
-            </ul>
-          </div>
-          <!-- /main navigation -->
-        </div>
-        <!-- /sidebar content -->
+    <!-- Main sidebar -->
+    <div class="sidebar sidebar-dark sidebar-main sidebar-expand-md">
+      <!-- Sidebar mobile toggler -->
+      <div class="sidebar-mobile-toggler text-center">
+        <a href="#" class="sidebar-mobile-main-toggle">
+          <i class="icon-arrow-left8"></i>
+        </a>
+        Navigation
+        <a href="#" class="sidebar-mobile-expand">
+          <i class="icon-screen-full"></i>
+          <i class="icon-screen-normal"></i>
+        </a>
       </div>
-      <!-- /main sidebar -->
+      <!-- /sidebar mobile toggler -->
+
+      <!-- Sidebar content -->
+      <div class="sidebar-content">
+        <!-- Main navigation -->
+        <div class="card card-sidebar-mobile">
+          <ul class="nav nav-sidebar" data-nav-type="accordion">
+            <!-- Main -->
+            <li class="nav-item">
+              <a href="index.html" class="nav-link">
+                <i class="icon-home4"></i>
+                <span>
+                  Home
+                </span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link"><i class="icon-stack"></i> <span>조회</span></a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link"
+                ><i class="icon-upload"></i> <span>신규케이스 등록</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link"
+                ><i class="icon-users"></i> <span>학과, 교수관리</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link"
+                ><i class="icon-price-tags"></i> <span>태그 관리</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link"><i class="icon-code"></i> <span>기타 코드 관리</span></a>
+            </li>
+
+            <!-- /main -->
+          </ul>
+        </div>
+        <!-- /main navigation -->
+      </div>
+      <!-- /sidebar content -->
     </div>
-    <!-- /page content -->
+    <!-- /main sidebar -->
   </div>
 </template>
 
@@ -110,6 +106,9 @@ export default {};
 </script>
 
 <style lnag="scss" scoped>
+.sidebar-main {
+  width: 10%;
+}
 .navbar-expand-md {
   position: relative;
 }
