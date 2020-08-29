@@ -45,7 +45,7 @@ var GoogleLineBasic = (function() {
     // Chart settings
     function drawLineChart() {
       // Define charts element
-      var line_chart_element = document.getElementById('google-line');
+      var line_chart_element = document.getElementById('google-line2');
 
       // Data
       var data = google.visualization.arrayToDataTable([
