@@ -1,21 +1,21 @@
 /* ------------------------------------------------------------------------------
  *
- *  # Google Visualization - lines
+ *  # Google Visualization - columns
  *
- *  Google Visualization line chart demonstration
+ *  Google Visualization column chart demonstration
  *
  * ---------------------------------------------------------------------------- */
 
 // Setup module
 // ------------------------------
 
-var GoogleLineBasic = (function() {
+var GoogleColumnBasic = (function() {
   //
   // Setup module components
   //
 
-  // Line chart
-  var _googleLineBasic = function() {
+  // Column chart
+  var _googleColumnBasic = function() {
     if (typeof google == 'undefined') {
       console.warn('Warning - Google Charts library is not loaded.');
       return;
@@ -25,17 +25,17 @@ var GoogleLineBasic = (function() {
     google.charts.load('current', {
       callback: function() {
         // Draw chart
-        drawLineChart();
+        drawColumn();
 
         // Resize on sidebar width change
-        $(document).on('click', '.sidebar-control', drawLineChart);
+        $(document).on('click', '.sidebar-control', drawColumn);
 
         // Resize on window resize
-        var resizeLineBasic;
+        var resizeColumn;
         $(window).on('resize', function() {
-          clearTimeout(resizeLineBasic);
-          resizeLineBasic = setTimeout(function() {
-            drawLineChart();
+          clearTimeout(resizeColumn);
+          resizeColumn = setTimeout(function() {
+            drawColumn();
           }, 200);
         });
       },
@@ -43,9 +43,9 @@ var GoogleLineBasic = (function() {
     });
 
     // Chart settings
-    function drawLineChart() {
+    function drawColumn() {
       // Define charts element
-      var line_chart_element = document.getElementById('google-line');
+      var line_chart_element = document.getElementById('google-column2');
 
       // Data
       var data = google.visualization.arrayToDataTable([
@@ -57,17 +57,15 @@ var GoogleLineBasic = (function() {
       ]);
 
       // Options
-      var options = {
+      var options_column = {
         fontName: 'Roboto',
         height: 400,
-        curveType: 'function',
         fontSize: 12,
         chartArea: {
           left: '5%',
           width: '94%',
           height: 350,
         },
-        pointSize: 4,
         tooltip: {
           textStyle: {
             fontName: 'Roboto',
@@ -96,8 +94,8 @@ var GoogleLineBasic = (function() {
       };
 
       // Draw chart
-      var line_chart = new google.visualization.LineChart(line_chart_element);
-      line_chart.draw(data, options);
+      var column = new google.visualization.ColumnChart(line_chart_element);
+      column.draw(data, options_column);
     }
   };
 
@@ -107,7 +105,7 @@ var GoogleLineBasic = (function() {
 
   return {
     init: function() {
-      _googleLineBasic();
+      _googleColumnBasic();
     },
   };
 })();
@@ -115,4 +113,4 @@ var GoogleLineBasic = (function() {
 // Initialize module
 // ------------------------------
 
-GoogleLineBasic.init();
+GoogleColumnBasic.init();
