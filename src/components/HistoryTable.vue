@@ -7,28 +7,33 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>출원번호</th>
+                <th>년도</th>
+                <th>월</th>
                 <th>변경 전</th>
                 <th>변경 후</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>1</td>
+                <td>2020</td>
+                <td>8</td>
                 <td>이전내용</td>
                 <td>현재내용</td>
               </tr>
               <tr>
-                <td>2</td>
+                <td>2019</td>
+                <td>4</td>
                 <td>이전내용2</td>
                 <td>현재내용2</td>
               </tr>
               <tr>
-                <td>3</td>
+                <td>2018</td>
+                <td>11</td>
                 <td>이전내용3</td>
                 <td>현재내용3</td>
               </tr>
               <tr>
+                <td>2017</td>
                 <td>4</td>
                 <td>이전내용4</td>
                 <td>현재내용4</td>
