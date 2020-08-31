@@ -13,32 +13,47 @@
             </div>
           </div>
         </div>
-
-        <div class="card-body">
-          <div class="chart-container">
-            <div class="chart" id="google-line2"></div>
-          </div>
-        </div>
+        <div class="chart" id="regist-line-chart"></div>
       </div>
       <!-- /simple line chart -->
     </div>
   </div>
 </template>
 
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
-// import { lineChart } from '../../public/global_assets/js/demo_pages/charts/google/lines/lines';
-
 export default {
+  methods: {
+    draw_chart(draw_id, chart_data) {
+      google.charts.load('current', { packages: ['corechart'] });
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(chart_data);
+        var options = {
+          title: 'Company Performance',
+          curveType: 'function',
+          legend: { position: 'bottom' },
+        };
+        var chart = new google.visualization.LineChart(document.getElementById(draw_id));
+        chart.draw(data, options);
+      }
+    },
+  },
   mounted() {
-    // lineChart();
-    let externalScript = document.createElement('script');
-    externalScript.setAttribute(
-      'src',
-      '/global_assets/js/demo_pages/charts/google/lines/lines2.js',
-    );
-    document.head.appendChild(externalScript);
+    this.draw_chart('regist-line-chart', [
+      ['Year', 'Sales', 'Expenses'],
+      ['2005', 1000, 400],
+      ['2006', 1170, 460],
+      ['2007', 660, 1120],
+      ['2008', 1030, 540],
+    ]);
   },
 };
 </script>
 
-<style></style>
+<style>
+#regist-line-chart {
+  width: 100%;
+  height: 400px;
+}
+</style>
