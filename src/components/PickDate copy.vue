@@ -1,42 +1,26 @@
 <template>
   <div class="form-group">
     <div class="input-group">
-      {{ date }}
-      <select v-model="dateType" id="select-date">
-        <option value="year">연</option>
+      <select id="select-date">
+        <option value="year">년</option>
         <option value="month">월</option>
         <option value="day">일</option>
       </select>
       <div class="date-container">
-        <input v-model="date" type="text" class="form-control daterange-left" @keyup="check()" />
+        <input type="text" class="form-control daterange-left" value="03/18/2013 - 03/23/2013" />
         <span class="input-group-append">
           <span class="input-group-text">
             <i class="icon-calendar22"></i>
           </span>
         </span>
       </div>
-      <button @click="emitDate">조회</button>
+      <button>조회</button>
     </div>
   </div>
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      dateType: 'year',
-      date: new Date(),
-    };
-  },
-  methods: {
-    check() {
-      console.log(this.date);
-    },
-    emitDate() {
-      this.$emit('updateDate', this.dateType, this.date);
-    },
-  },
-};
+export default {};
 </script>
 
 <style lang="scss" scoped>
@@ -44,7 +28,7 @@ export default {
   margin-bottom: 5%;
 
   .input-group {
-    width: 360px;
+    width: 350px;
     margin: 0 auto;
 
     .select-container {
@@ -57,7 +41,6 @@ export default {
     }
 
     #select-date {
-      width: 40px;
       margin-right: 5%;
       border: 1px solid black;
       border-radius: 3px;
@@ -67,10 +50,6 @@ export default {
       display: flex;
       border: 1px solid black;
       border-radius: 3px;
-
-      input {
-        width: 180px;
-      }
     }
 
     button {

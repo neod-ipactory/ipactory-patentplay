@@ -5,7 +5,10 @@
       <SideBar></SideBar>
       <div class="main-content">
         <div class="graph-container">
-          <PickDate></PickDate>
+          <PickDate @updateDate="sendDate"></PickDate>
+          <!-- <div class="date-picker-container">
+            <vc-date-picker v-model="date" mode="range" color="red" is-dark></vc-date-picker>
+          </div> -->
           <div class="line-chart">
             <h4>출원동향</h4>
             <GLineChart></GLineChart>
@@ -88,6 +91,11 @@ import GBarGraph3 from '../components/chart/GBarGraph3.vue';
 import UpdateTable from '../components/UpdateTable.vue';
 
 export default {
+  data() {
+    return {
+      date: new Date(),
+    };
+  },
   components: {
     Nav,
     SideBar,
@@ -98,6 +106,11 @@ export default {
     GBarGraph2,
     GBarGraph3,
     UpdateTable,
+  },
+  methods: {
+    sendDate(dateType, date) {
+      console.log(dateType, date);
+    },
   },
 };
 </script>
@@ -111,6 +124,15 @@ export default {
   .graph-container {
     width: 55%;
     margin-top: 3%;
+
+    .date-picker-container {
+      width: 200px;
+      margin: 0 auto;
+
+      .vc-text-gray-800 {
+        color: #2d3748;
+      }
+    }
 
     .date-container {
       width: 230px;
