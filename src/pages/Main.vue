@@ -38,8 +38,6 @@
         <div class="vertical-line"></div>
         <div class="weekly-update-container">
           <h4>주간 업데이트</h4>
-          <UpdateTable></UpdateTable>
-          <h4>과거 이력 조회</h4>
           <div class="select-container">
             <select>
               <option selected disabled>년도</option>
@@ -79,19 +77,15 @@
 </template>
 
 <script>
-import Nav from "../components/Nav.vue";
-import SideBar from "../components/SideBar.vue";
-import PickDate from "../components/PickDate.vue";
-import GLineChart from "../components/chart/GLineChart.vue";
-import GLineChart2 from "../components/chart/GLineChart2.vue";
-import GBarGraph from "../components/chart/GBarGraph.vue";
-import GBarGraph2 from "../components/chart/GBarGraph2.vue";
-import GBarGraph3 from "../components/chart/GBarGraph3.vue";
-import UpdateTable from "../components/UpdateTable.vue";
-// import Vue from 'vue';
-// import { MonthPickerInput } from 'vue-month-picker';
-
-// Vue.use(MonthPickerInput);
+import Nav from '../components/Nav.vue';
+import SideBar from '../components/SideBar.vue';
+import PickDate from '../components/PickDate.vue';
+import GLineChart from '../components/chart/GLineChart.vue';
+import GLineChart2 from '../components/chart/GLineChart2.vue';
+import GBarGraph from '../components/chart/GBarGraph.vue';
+import GBarGraph2 from '../components/chart/GBarGraph2.vue';
+import GBarGraph3 from '../components/chart/GBarGraph3.vue';
+import UpdateTable from '../components/UpdateTable.vue';
 
 export default {
   components: {
@@ -104,7 +98,6 @@ export default {
     GBarGraph2,
     GBarGraph3,
     UpdateTable,
-    // MonthPickerInput,
   },
 };
 </script>
@@ -139,6 +132,8 @@ export default {
 
     .line-chart,
     .bar-graph {
+      width: 100%;
+
       select {
         width: 10%;
         height: 30px;
@@ -164,7 +159,7 @@ export default {
   .weekly-update-container {
     width: 45%;
     height: 1000px;
-    padding-top: 8.8%;
+    padding-top: 7.3%;
     position: sticky;
     top: 0;
 

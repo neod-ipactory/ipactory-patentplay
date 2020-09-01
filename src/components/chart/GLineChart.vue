@@ -3,39 +3,65 @@
     <div class="content">
       <!-- Simple line chart -->
       <div class="card">
-        <div class="card-header header-elements-inline">
-          <h5 class="card-title">Simple line chart</h5>
-          <div class="header-elements">
-            <div class="list-icons">
-              <a class="list-icons-item" data-action="collapse"></a>
-              <a class="list-icons-item" data-action="reload"></a>
-              <a class="list-icons-item" data-action="remove"></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="card-body">
-          <div class="chart-container">
-            <div class="chart" id="google-line"></div>
-          </div>
-        </div>
+        <div class="chart" id="apply-line-chart"></div>
       </div>
       <!-- /simple line chart -->
     </div>
   </div>
 </template>
 
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
-// import { lineChart } from '../../public/global_assets/js/demo_pages/charts/google/lines/lines';
+import axios from 'axios';
 
 export default {
+  data() {
+    return {
+      chartData: [],
+    };
+  },
+  // computed: {
+  //   applyData: this.$state.getters.getApplyLineChart,
+  // },
+  methods: {
+    draw_chart(draw_id, chart_data) {
+      console.log('draw_chart');
+      google.charts.load('current', { packages: ['corechart'] });
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable(chart_data);
+        var options = {
+          // title: 'Company Performance',
+          curveType: 'function',
+          legend: { position: 'bottom' },
+        };
+        var chart = new google.visualization.LineChart(document.getElementById(draw_id));
+        chart.draw(data, options);
+      }
+      console.log('draw_chart2');
+    },
+  },
+  created() {
+    this.$store.dispatch('FETCH_APPLY_LINE_CHART');
+  },
   mounted() {
-    // lineChart();
-    let externalScript = document.createElement('script');
-    externalScript.setAttribute('src', '/global_assets/js/demo_pages/charts/google/lines/lines.js');
-    document.head.appendChild(externalScript);
+    // axios
+    //   .get('http://localhost:8081/data/applyLineChart.json')
+    //   .then((response) => (this.chartData = response.data.data))
+    //   .then((response) => this.draw_chart('apply-line-chart', this.chartData))
+    //   .catch((error) => console.log(error));
+    console.log('state => ', this.$store.state.applyLineChart);
+    console.log('getters => ', this.$store.getters.getApplyLineChart);
+    // this.draw_chart('apply-line-chart', this.$store.state.applyLineChart);
+    this.draw_chart('apply-line-chart', this.$store.getters.getApplyLineChart);
+    // this.draw_chart('apply-line-chart', this.$store.getters.applyData);
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+#apply-line-chart {
+  width: 100%;
+  height: 400px;
+}
+</style>

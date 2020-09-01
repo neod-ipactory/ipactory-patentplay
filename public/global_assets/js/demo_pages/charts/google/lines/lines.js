@@ -13,7 +13,13 @@ var GoogleLineBasic = (function() {
   //
   // Setup module components
   //
-
+  var array_add = [
+    ['Year', 'Sales', 'Expenses'],
+    ['2004', 1000, 400],
+    ['2005', 1170, 460],
+    ['2006', 660, 1120],
+    ['2007', 1030, 540],
+  ];
   // Line chart
   var _googleLineBasic = function() {
     if (typeof google == 'undefined') {
@@ -46,15 +52,9 @@ var GoogleLineBasic = (function() {
     function drawLineChart() {
       // Define charts element
       var line_chart_element = document.getElementById('google-line');
-
+      console.log('array_add', array_add);
       // Data
-      var data = google.visualization.arrayToDataTable([
-        ['Year', 'Sales', 'Expenses'],
-        ['2004', 1000, 400],
-        ['2005', 1170, 460],
-        ['2006', 660, 1120],
-        ['2007', 1030, 540],
-      ]);
+      var data = google.visualization.arrayToDataTable(array_add);
 
       // Options
       var options = {
@@ -109,10 +109,25 @@ var GoogleLineBasic = (function() {
     init: function() {
       _googleLineBasic();
     },
+    setArray: function(list) {
+      array_add = list;
+    },
   };
 })();
 
 // Initialize module
 // ------------------------------
+//GoogleLineBasic.setArray = [2, 3, 4];
+
+GoogleLineBasic.setArray = [
+  ['Year', 'Sales', 'Expenses'],
+  ['2006', 1000, 400],
+  ['2007', 1170, 460],
+  ['2008', 660, 1120],
+  ['2009', 1030, 540],
+];
 
 GoogleLineBasic.init();
+
+console.log(' current array add prev ', GoogleLineBasic.array_add);
+console.log(' current array add ', GoogleLineBasic.array_add);
