@@ -10,7 +10,9 @@
   "dependencies": {
     "axios": "^0.20.0",
     "core-js": "^3.6.5",
+    "v-calendar": "^1.0.8",
     "vue": "^2.6.11",
+    "vue-google-charts": "^0.3.3",
     "vue-month-picker": "^1.3.0",
     "vue-router": "^3.4.3",
     "vue-styled-components": "^1.5.1",
