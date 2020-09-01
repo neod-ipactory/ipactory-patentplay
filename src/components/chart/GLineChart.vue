@@ -20,8 +20,12 @@ export default {
       chartData: [],
     };
   },
+  // computed: {
+  //   applyData: this.$state.getters.getApplyLineChart,
+  // },
   methods: {
     draw_chart(draw_id, chart_data) {
+      console.log('draw_chart');
       google.charts.load('current', { packages: ['corechart'] });
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
@@ -34,14 +38,23 @@ export default {
         var chart = new google.visualization.LineChart(document.getElementById(draw_id));
         chart.draw(data, options);
       }
+      console.log('draw_chart2');
     },
   },
+  created() {
+    this.$store.dispatch('FETCH_APPLY_LINE_CHART');
+  },
   mounted() {
-    axios
-      .get('http://localhost:8081/data/applyLineChart.json')
-      .then((response) => (this.chartData = response.data.data))
-      .then((response) => this.draw_chart('apply-line-chart', this.chartData))
-      .catch((error) => consol.log(error));
+    // axios
+    //   .get('http://localhost:8081/data/applyLineChart.json')
+    //   .then((response) => (this.chartData = response.data.data))
+    //   .then((response) => this.draw_chart('apply-line-chart', this.chartData))
+    //   .catch((error) => console.log(error));
+    console.log('state => ', this.$store.state.applyLineChart);
+    console.log('getters => ', this.$store.getters.getApplyLineChart);
+    // this.draw_chart('apply-line-chart', this.$store.state.applyLineChart);
+    this.draw_chart('apply-line-chart', this.$store.getters.getApplyLineChart);
+    // this.draw_chart('apply-line-chart', this.$store.getters.applyData);
   },
 };
 </script>
