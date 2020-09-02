@@ -1,7 +1,6 @@
 <template>
   <div class="form-group">
     <div class="input-group">
-      {{ date }}
       <select v-model="dateType" id="select-date">
         <option value="year">연</option>
         <option value="month">월</option>

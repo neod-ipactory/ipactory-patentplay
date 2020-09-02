@@ -5,10 +5,23 @@
       <SideBar></SideBar>
       <div class="main-content">
         <div class="graph-container">
-          <PickDate @updateDate="sendDate"></PickDate>
-          <!-- <div class="date-picker-container">
-            <vc-date-picker v-model="date" mode="range" color="red" is-dark></vc-date-picker>
-          </div> -->
+          <!-- <PickDate @updateDate="sendDate"></PickDate> -->
+          <div class="date-picker-container">
+            <select v-model="dateType" id="select-date">
+              <option value="year">연</option>
+              <option value="month">월</option>
+              <option value="day">일</option>
+            </select>
+            <vc-date-picker
+              v-model="date"
+              mode="range"
+              color="red"
+              is-dark
+              :max-date="new Date()"
+              id="date-picker"
+            ></vc-date-picker>
+            <button @click="fetchDate">조회</button>
+          </div>
           <div class="line-chart">
             <h4>출원동향</h4>
             <GLineChart></GLineChart>
@@ -82,24 +95,51 @@
 <script>
 import Nav from '../components/Nav.vue';
 import SideBar from '../components/SideBar.vue';
-import PickDate from '../components/PickDate.vue';
+// import PickDate from '../components/PickDate.vue';
 import GLineChart from '../components/chart/GLineChart.vue';
 import GLineChart2 from '../components/chart/GLineChart2.vue';
 import GBarGraph from '../components/chart/GBarGraph.vue';
 import GBarGraph2 from '../components/chart/GBarGraph2.vue';
 import GBarGraph3 from '../components/chart/GBarGraph3.vue';
 import UpdateTable from '../components/UpdateTable.vue';
+// import { config } from '../api';
+// import axios from 'axios';
 
 export default {
   data() {
     return {
+      dateType: 'year',
+      // date: { start: '2020-08-31T15:00:00.000Z', end: '2020-09-01T15:00:00.000Z' },
       date: new Date(),
     };
   },
+  // computed: {
+  //   defaultDate() {
+  //     let nowDate = new Date().toISOString().substring(0, 10);
+  //     let pastDate =
+  //       nowDate.substr(0, 2) + (parseInt(nowDate.substr(2, 4)) - 1).toString() + nowDate.substr(4);
+  //     let defaultDateValue = nowDate + ' - ' + pastDate;
+  //     return defaultDateValue;
+  //   },
+  // },
+  created() {
+    // let nowDate = new Date().toISOString().substring(0, 10);
+    // let pastDate =
+    //   nowDate.substr(0, 2) + (parseInt(nowDate.substr(2, 4)) - 1).toString() + nowDate.substr(4);
+    // let defaultDateValue = pastDate + ' - ' + nowDate;
+    // // this.date = defaultDateValue;
+    // console.log('first', this.date);
+    // this.date = new Date(defaultDateValue);
+    // console.log(this.date);
+    // this.date.start = new Date(pastDate).toISOString();
+    // this.date.end = new Date(nowDate).toISOString();
+    // console.log('last', this.date.start);
+  },
+  // { "start": "2020-08-31T15:00:00.000Z", "end": "2020-09-01T15:00:00.000Z" }
   components: {
     Nav,
     SideBar,
-    PickDate,
+    // PickDate,
     GLineChart,
     GLineChart2,
     GBarGraph,
@@ -108,9 +148,34 @@ export default {
     UpdateTable,
   },
   methods: {
-    sendDate(dateType, date) {
-      console.log(dateType, date);
+    // fetchDate() {
+    //   var vm = this;
+    //   console.log(vm.dateType, vm.date);
+    // },
+    // fetchDate() {
+    //   const vm = this;
+    //   let fetchData = { dateType: vm.dateType, date: vm.date };
+    //   fetchDateApplyLineChart(fetchData);
+    // },
+    fetchDate() {
+      let dateUnit = this.dateType;
+      if (this.date !== null) {
+        const startDate = this.date.start.toISOString().substring(0, 10);
+        const endDate = this.date.end.toISOString().substring(0, 10);
+        this.$store.dispatch('FETCH_APPLY_LINE_CHART2', { dateUnit, startDate, endDate });
+        // axios
+        //   .get(`${config.chartUrl}${this.dateType}&f_date=${startDate}&e_date=${endDate}`)
+        //   .then((response) => console.log(response.data))
+        //   .catch((error) => console.log(error));
+      }
     },
+  },
+  mounted() {
+    const calendarInput = document.querySelector(
+      '#app > div > div.page-content > div.main-content > div.graph-container > div.date-picker-container > span > input',
+    );
+    calendarInput.style.color = 'black';
+    calendarInput.value = new Date().toISOString().substring(0, 10);
   },
 };
 </script>
@@ -126,15 +191,32 @@ export default {
     margin-top: 3%;
 
     .date-picker-container {
-      width: 200px;
-      margin: 0 auto;
+      width: 350px;
+      margin: 0 auto 3%;
+      display: flex;
 
-      .vc-text-gray-800 {
-        color: #2d3748;
+      #select-date {
+        width: 40px;
+        margin-right: 5%;
+        border: 1px solid black;
+        border-radius: 3px;
+      }
+
+      #date-picker {
+        border: 1px solid black;
+        border-radius: 3px;
+      }
+
+      button {
+        width: 50px;
+        margin-left: 5%;
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 3px;
       }
     }
 
-    .date-container {
+    /* .date-container {
       width: 230px;
       margin-left: auto;
 
@@ -142,7 +224,7 @@ export default {
       #year-picker {
         z-index: 1;
       }
-    }
+    } */
 
     h4 {
       text-align: center;
