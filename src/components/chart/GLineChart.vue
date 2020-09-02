@@ -16,7 +16,7 @@ import { mapGetters } from 'vuex';
 
 export default {
   computed: {
-    ...mapGetters(['getApplyLineChart', 'getApplyLineChart2']),
+    ...mapGetters(['getApplyLineChart']),
   },
   components: {
     GChart,
@@ -25,7 +25,7 @@ export default {
     let endDate = new Date().toISOString().substring(0, 10);
     let startDate =
       endDate.substr(0, 2) + (parseInt(endDate.substr(2, 4)) - 1).toString() + endDate.substr(4);
-    this.$store.dispatch('FETCH_APPLY_LINE_CHART2', { dateUnit: 'month', startDate, endDate });
+    this.$store.dispatch('FETCH_CHART_DATA', { dateUnit: 'month', startDate, endDate });
   },
 };
 </script>

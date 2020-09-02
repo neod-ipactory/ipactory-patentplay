@@ -50,6 +50,10 @@ export default {};
 <style lnag="scss" scoped>
 .sidebar {
   max-width: 10%;
+  margin-top: 48px;
+  padding-left: 0.5%;
+  top: 48px;
+  z-index: 1;
 }
 
 .sidebar-content {
@@ -57,6 +61,6 @@ export default {};
 }
 
 .nav-sidebar {
-  margin-top: 10%;
+  position: fixed;
 }
 </style>

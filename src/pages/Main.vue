@@ -162,7 +162,7 @@ export default {
       if (this.date !== null) {
         const startDate = this.date.start.toISOString().substring(0, 10);
         const endDate = this.date.end.toISOString().substring(0, 10);
-        this.$store.dispatch('FETCH_APPLY_LINE_CHART2', { dateUnit, startDate, endDate });
+        this.$store.dispatch('FETCH_CHART_DATA', { dateUnit, startDate, endDate });
         // axios
         //   .get(`${config.chartUrl}${this.dateType}&f_date=${startDate}&e_date=${endDate}`)
         //   .then((response) => console.log(response.data))
