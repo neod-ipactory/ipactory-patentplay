@@ -1,11 +1,17 @@
 export default {
-  getApplyLineChart(state) {
-    return state.applyLineChart;
+  getLineApplyChart(state) {
+    return state.lineApplyChart;
   },
-  getRegisterLineChart(state) {
-    return state.registerLineChart;
+  getLineRegisterChart(state) {
+    return state.lineRegisterChart;
   },
-  // getApplyLineChart2(state) {
-  //   return state.applyLineChart2;
-  // },
+  getColumnMajorChart(state) {
+    return state.columnMajorChart;
+  },
+  getColumnProfessorChart(state) {
+    return state.columnProfessorChart;
+  },
+  getColumnCoworkChart(state) {
+    return state.columnCoworkChart;
+  },
 };

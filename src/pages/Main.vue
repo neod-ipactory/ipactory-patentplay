@@ -1,4 +1,4 @@
-<template>
+script<template>
   <div>
     <Nav></Nav>
     <div class="page-content">
@@ -24,64 +24,41 @@
           </div>
           <div class="line-chart">
             <h4>출원동향</h4>
-            <GLineChart></GLineChart>
+            <LineApplyChart></LineApplyChart>
           </div>
           <div class="line-chart">
             <h4>등록동향</h4>
-            <GLineChart2></GLineChart2>
+            <LineRegisterChart></LineRegisterChart>
           </div>
           <div class="bar-graph">
             <h4>학과별 출원동향</h4>
-            <GBarGraph></GBarGraph>
+            <!-- <GBarGraph></GBarGraph> -->
+            <ColumnMajorChart></ColumnMajorChart>
           </div>
           <div class="bar-graph">
             <h4>교수별 출원동향</h4>
-            <select>
-              <option selected disabled>학과</option>
-              <option value="A">A과</option>
-              <option value="B">B과</option>
-              <option value="C">C과</option>
-              <option value="D">D과</option>
-              <option value="E">E과</option>
+            <select v-model="selectedMajor">
+              <option disabled>학과</option>
+              <option v-for="major in majors" :key="major">{{ major }}</option>
             </select>
-            <GBarGraph2></GBarGraph2>
+            <ColumnProfessorChart></ColumnProfessorChart>
           </div>
           <div class="bottom">
             <h4>공동출원</h4>
-            <GBarGraph3></GBarGraph3>
+            <ColumnCoworkChart></ColumnCoworkChart>
           </div>
         </div>
         <div class="vertical-line"></div>
         <div class="weekly-update-container">
           <h4>주간 업데이트</h4>
           <div class="select-container">
-            <select>
-              <option selected disabled>년도</option>
-              <option value="2020">2020</option>
-              <option value="2019">2019</option>
-              <option value="2018">2018</option>
-              <option value="2017">2017</option>
-              <option value="2016">2016</option>
-              <option value="2015">2015</option>
-              <option value="2014">2014</option>
-              <option value="2013">2013</option>
-              <option value="2012">2012</option>
-              <option value="2011">2011</option>
+            <select v-model="selectedYear">
+              <option disabled>년도</option>
+              <option v-for="year in years" :key="year">{{year}}</option>
             </select>
-            <select>
-              <option selected disabled>월</option>
-              <option value="1">1월</option>
-              <option value="2">2월</option>
-              <option value="3">3월</option>
-              <option value="4">4월</option>
-              <option value="5">5월</option>
-              <option value="6">6월</option>
-              <option value="7">7월</option>
-              <option value="8">8월</option>
-              <option value="9">9월</option>
-              <option value="10">10월</option>
-              <option value="11">11월</option>
-              <option value="12">12월</option>
+            <select v-model="selectedMonth">
+              <option disabled>월</option>
+              <option v-for="month in months" :key="month">{{ month }}월</option>
             </select>
             <button>조회</button>
           </div>
@@ -93,26 +70,38 @@
 </template>
 
 <script>
-import Nav from '../components/Nav.vue';
-import SideBar from '../components/SideBar.vue';
-// import PickDate from '../components/PickDate.vue';
-import GLineChart from '../components/chart/GLineChart.vue';
-import GLineChart2 from '../components/chart/GLineChart2.vue';
-import GBarGraph from '../components/chart/GBarGraph.vue';
-import GBarGraph2 from '../components/chart/GBarGraph2.vue';
-import GBarGraph3 from '../components/chart/GBarGraph3.vue';
-import UpdateTable from '../components/UpdateTable.vue';
-// import { config } from '../api';
-// import axios from 'axios';
+import Nav from "../components/Nav.vue";
+import SideBar from "../components/SideBar.vue";
+import LineApplyChart from "../components/chart/LineApplyChart.vue";
+import LineRegisterChart from "../components/chart/LineRegisterChart.vue";
+import ColumnMajorChart from "../components/chart/ColumnMajorChart.vue";
+import ColumnProfessorChart from "../components/chart/ColumnProfessorChart.vue";
+import ColumnCoworkChart from "../components/chart/ColumnCoworkChart.vue";
+import UpdateTable from "../components/UpdateTable.vue";
+import { majors, months } from "../../public/data";
 
 export default {
   data() {
     return {
-      dateType: 'year',
-      // date: { start: '2020-08-31T15:00:00.000Z', end: '2020-09-01T15:00:00.000Z' },
+      dateType: "year",
       date: new Date(),
+      majors,
+      months,
+      selectedMajor: "학과",
+      selectedYear: "년도",
+      selectedMonth: "월",
     };
   },
+  computed: {
+    years() {
+      const year = Number(new Date().toISOString().substring(0, 4));
+      const yearsArray = Array(year - 1997)
+        .fill()
+        .map((y, i) => year - i);
+      return yearsArray;
+    },
+  },
+
   // computed: {
   //   defaultDate() {
   //     let nowDate = new Date().toISOString().substring(0, 10);
@@ -122,6 +111,16 @@ export default {
   //     return defaultDateValue;
   //   },
   // },
+  watch: {
+    selectedMajor() {
+      const major = this.selectedMajor;
+      if (this.date !== null) {
+        const startDate = this.date.start.toISOString().substring(0, 10);
+        const endDate = this.date.end.toISOString().substring(0, 10);
+        this.$store.dispatch("FETCH_MAJOR", { startDate, endDate, major });
+      }
+    },
+  },
   created() {
     // let nowDate = new Date().toISOString().substring(0, 10);
     // let pastDate =
@@ -139,12 +138,11 @@ export default {
   components: {
     Nav,
     SideBar,
-    // PickDate,
-    GLineChart,
-    GLineChart2,
-    GBarGraph,
-    GBarGraph2,
-    GBarGraph3,
+    LineApplyChart,
+    LineRegisterChart,
+    ColumnMajorChart,
+    ColumnProfessorChart,
+    ColumnCoworkChart,
     UpdateTable,
   },
   methods: {
@@ -162,21 +160,44 @@ export default {
       if (this.date !== null) {
         const startDate = this.date.start.toISOString().substring(0, 10);
         const endDate = this.date.end.toISOString().substring(0, 10);
-        this.$store.dispatch('FETCH_CHART_DATA', { dateUnit, startDate, endDate });
+        this.$store.dispatch("FETCH_CHART_DATA", {
+          dateUnit,
+          startDate,
+          endDate,
+        });
         // axios
         //   .get(`${config.chartUrl}${this.dateType}&f_date=${startDate}&e_date=${endDate}`)
         //   .then((response) => console.log(response.data))
         //   .catch((error) => console.log(error));
       }
     },
+    handleVcalendar() {
+      const calendarInput = document.querySelector(
+        "#app > div > div.page-content > div.main-content > div.graph-container > div.date-picker-container > span > input"
+      );
+      calendarInput.style.color = "black";
+      calendarInput.value = new Date().toISOString().substring(0, 10);
+    },
+    // fetchMajor() {
+    //   const major = this.selectedMajor;
+    //   if (this.date !== null ) {
+    //     const startDate = this.date.start.toISOString().substring(0, 10);
+    //     const endDate = this.date.end.toISOString().substring(0, 10);
+    //     this.$store.dispatch("FETCH_MAJOR", { startDate, endDate, major });
+    //   }
+    // },
   },
+  //   {
+  //     "f_date":"2010-01-01",
+  //     "e_date":"2015-12-31",
+  //     "major":"정밀화학과"
+  // }
   mounted() {
-    const calendarInput = document.querySelector(
-      '#app > div > div.page-content > div.main-content > div.graph-container > div.date-picker-container > span > input',
-    );
-    calendarInput.style.color = 'black';
-    calendarInput.value = new Date().toISOString().substring(0, 10);
+    this.handleVcalendar();
   },
+  // updated() {
+  //   this.fetchMajor();
+  // },
 };
 </script>
 
@@ -239,7 +260,7 @@ export default {
       width: 100%;
 
       select {
-        width: 10%;
+        width: 150px;
         height: 30px;
         display: block;
         margin: 0 2% 0 auto;
@@ -275,18 +296,18 @@ export default {
     }
 
     .select-container {
-      width: 25%;
+      width: 35%;
       display: flex;
       margin-left: auto;
 
       select {
-        width: 40%;
+        width: 100px;
         height: 25px;
         margin-left: 5%;
       }
 
       button {
-        width: 30%;
+        width: 50px;
         height: 25px;
         margin: 0 12% 0 5%;
         background-color: white;

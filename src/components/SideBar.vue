@@ -8,29 +8,40 @@
         <ul class="nav nav-sidebar" data-nav-type="accordion">
           <!-- Main -->
           <li class="nav-item">
-            <a href="index.html" class="nav-link">
+            <a href="/main" class="nav-link">
               <i class="icon-home4"></i>
-              <span>
-                Home
-              </span>
+              <span>Home</span>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link"><i class="icon-stack"></i> <span>조회</span></a>
+            <a href="#" class="nav-link">
+              <i class="icon-stack"></i>
+              <span>조회</span>
+            </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link"
-              ><i class="icon-upload"></i> <span>신규케이스 등록</span></a
-            >
+            <a href="#" class="nav-link">
+              <i class="icon-upload"></i>
+              <span>신규케이스 등록</span>
+            </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link"><i class="icon-users"></i> <span>학과, 교수관리</span></a>
+            <a href="#" class="nav-link">
+              <i class="icon-users"></i>
+              <span>학과, 교수관리</span>
+            </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link"><i class="icon-price-tags"></i> <span>태그 관리</span></a>
+            <a href="#" class="nav-link">
+              <i class="icon-price-tags"></i>
+              <span>태그 관리</span>
+            </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link"><i class="icon-code"></i> <span>기타 코드 관리</span></a>
+            <a href="#" class="nav-link">
+              <i class="icon-code"></i>
+              <span>기타 코드 관리</span>
+            </a>
           </li>
 
           <!-- /main -->

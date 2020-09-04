@@ -3,7 +3,13 @@
     <div class="content">
       <!-- Simple line chart -->
       <div class="card">
-        <GChart id="apply-line-chart" type="LineChart" :data="getApplyLineChart" />
+        <GChart
+          v-if="getColumnProfessorChart.length !== 1"
+          id="major-column-chart"
+          type="ColumnChart"
+          :data="getColumnProfessorChart"
+        />
+        <NoData v-else></NoData>
       </div>
       <!-- /simple line chart -->
     </div>
@@ -11,15 +17,17 @@
 </template>
 
 <script>
+import NoData from '../NoData.vue';
 import { GChart } from 'vue-google-charts';
 import { mapGetters } from 'vuex';
 
 export default {
   computed: {
-    ...mapGetters(['getApplyLineChart']),
+    ...mapGetters(['getColumnProfessorChart']),
   },
   components: {
     GChart,
+    NoData,
   },
   created() {
     let endDate = new Date().toISOString().substring(0, 10);
@@ -31,7 +39,7 @@ export default {
 </script>
 
 <style scoped>
-#apply-line-chart {
+#major-column-chart {
   width: 100%;
   height: 400px;
 }
