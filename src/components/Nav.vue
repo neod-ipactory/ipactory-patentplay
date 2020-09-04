@@ -33,10 +33,14 @@ export default {};
 <style scoped>
 .navbar-expand-md {
   position: relative;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 2;
 }
 
 #navbar-mobile {
-  padding-left: 5px;
+  padding-left: 15px;
 }
 
 .navbar-brand {

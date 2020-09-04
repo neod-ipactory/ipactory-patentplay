@@ -3,7 +3,7 @@
     <div class="content">
       <!-- Simple line chart -->
       <div class="card">
-        <GChart id="apply-line-chart" type="LineChart" :data="getApplyLineChart" />
+        <GChart id="apply-line-chart" type="LineChart" :data="getLineApplyChart" />
       </div>
       <!-- /simple line chart -->
     </div>
@@ -16,13 +16,16 @@ import { mapGetters } from 'vuex';
 
 export default {
   computed: {
-    ...mapGetters(['getApplyLineChart']),
+    ...mapGetters(['getLineApplyChart']),
   },
   components: {
     GChart,
   },
   created() {
-    this.$store.dispatch('FETCH_APPLY_LINE_CHART');
+    let endDate = new Date().toISOString().substring(0, 10);
+    let startDate =
+      endDate.substr(0, 2) + (parseInt(endDate.substr(2, 4)) - 1).toString() + endDate.substr(4);
+    this.$store.dispatch('FETCH_CHART_DATA', { dateUnit: 'month', startDate, endDate });
   },
 };
 </script>

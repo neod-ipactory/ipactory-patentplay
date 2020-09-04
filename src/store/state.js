@@ -1,3 +1,7 @@
 export default {
-  applyLineChart: [],
+  lineApplyChart: [],
+  lineRegisterChart: [],
+  columnMajorChart: [],
+  columnProfessorChart: [],
+  columnCoworkChart: [],
 };
