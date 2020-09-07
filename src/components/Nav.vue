@@ -19,7 +19,7 @@
     </div>
     <div class="navbar-brand">
       <a href="index.html" class="d-inline-block">
-        <img src="/global_assets/images/logo_light.png" alt="" />
+        <img src="/global_assets/images/logo_light.png" alt />
       </a>
     </div>
   </div>
@@ -36,7 +36,7 @@ export default {};
   position: fixed;
   width: 100%;
   top: 0;
-  z-index: 2;
+  z-index: 3;
 }
 
 #navbar-mobile {
