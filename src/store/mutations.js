@@ -102,7 +102,7 @@ export default {
   SET_TAGS_INFO(state, data) {
     state.fetchedTags = data;
   },
-  SET_LIST_SHOW(state, data) {
-    state.selectedList = data;
+  SET_LIST_SHOW(state, list) {
+    state.selectedList = list;
   },
 };

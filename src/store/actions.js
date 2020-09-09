@@ -35,7 +35,12 @@ export default {
   FETCH_LIST_SHOW(context, { listshow }) {
     axios
       .post(`${config.basicUrl}list`, { listshow })
-      .then(({ data }) => context.commit('SET_LIST_SHOW', data))
+      // .then((response) => console.log(response.data.list))
+      .then(({ data }) => {
+        return context.commit('SET_LIST_SHOW', data.list), localStorage.setItem('list', data.list);
+      })
+      // .then(({ data }) => localStorage.setItem('list', data.list))
       .catch((error) => console.log(error));
+    // .finally(({ data }) => localStorage.setItem(('list', data.list)));
   },
 };
