@@ -1,8 +1,10 @@
 <template>
   <div class="main-right">
     <div class="main-right-head">
-      <span>총 747건</span>
-      <button @click="lookList">리스트 보기</button>
+      <span>총 {{ getFetchedTags.listshow.length }}건</span>
+      <router-link to="/list">
+        <button @click="lookList" class="list-button">리스트 보기</button>
+      </router-link>
     </div>
     <section>
       <div class="main-title">공동 경쟁기관 (2건 이상)</div>
@@ -51,15 +53,15 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from 'vuex';
 
 export default {
   computed: {
-    ...mapGetters(["getFetchedTags"]),
+    ...mapGetters(['getFetchedTags', 'getSelectedList']),
   },
   methods: {
     lookList() {
-      this.$store.dispatch("FETCH_LIST_SHOW", {
+      this.$store.dispatch('FETCH_LIST_SHOW', {
         listshow: this.getFetchedTags.listshow,
       });
     },
@@ -75,13 +77,19 @@ export default {
   .main-right-head {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     font-size: 20px;
 
-    button {
-      padding: 1%;
-      border: 1px solid #919190;
-      border-radius: 3px;
-      background-color: white;
+    a {
+      width: 18%;
+
+      .list-button {
+        width: 100%;
+        padding: 1%;
+        border: 1px solid #919190;
+        border-radius: 3px;
+        background-color: white;
+      }
     }
   }
 
