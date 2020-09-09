@@ -2,8 +2,12 @@
   <div class="main-left">
     <div class="tags-container">
       <section class="selected-tags-container">
-        <span>선택된 TAG</span>
-        <div class="selected-tags">선택된 태그가 있을 공간{{getTagStatus}}</div>
+        <span v-if="getSelectedTags.tagName.length > 0">선택된 TAG</span>
+        <span v-else>선택된 TAG가 없습니다.</span>
+        <div v-if="getSelectedTags.tagName.length > 0" class="selected-tags">
+          <!-- 선택된 태그가 있을 공간{{ getSelectedTags }}  -->
+          <button v-for="tag in getSelectedTags.tagName" class="selected-tag" :key="tag">{{ tag }}</button>
+        </div>
       </section>
       <section class="tags-category">
         <button disabled>TAGS</button>
@@ -32,7 +36,7 @@
           :max-date="new Date()"
           id="date-picker"
         ></vc-date-picker>
-        <button class="ask">조회</button>
+        <button @click="fetchDate" class="ask">조회</button>
       </section>
       <section class="toggles">
         <div class="toggle-left">
@@ -49,23 +53,23 @@
         </div>
         <div class="toggle-right">
           <div class="toggle-container">
-            <!-- <ToggleOrange @handle-toggle="passToggleStatus()"></ToggleOrange> -->
+            <ToggleOrange title="출원"></ToggleOrange>
             <span>출원중</span>
           </div>
           <div class="toggle-container">
-            <!-- <ToggleOrange @handle-toggle="passToggleStatus()"></ToggleOrange> -->
+            <ToggleOrange title="공개"></ToggleOrange>
             <span>공개</span>
           </div>
           <div class="toggle-container">
-            <!-- <ToggleOrange @handle-toggle="passToggleStatus()"></ToggleOrange> -->
+            <ToggleOrange title="심사중"></ToggleOrange>
             <span>심사중</span>
           </div>
           <div class="toggle-container">
-            <!-- <ToggleOrange @handle-toggle="passToggleStatus()"></ToggleOrange> -->
+            <ToggleOrange title="등록"></ToggleOrange>
             <span>등록유지</span>
           </div>
           <div class="toggle-container">
-            <!-- <ToggleOrange @handle-toggle="passToggleStatus()"></ToggleOrange> -->
+            <ToggleOrange title="거절/포기/취하"></ToggleOrange>
             <span>거절/포기/취하</span>
           </div>
         </div>
@@ -77,7 +81,7 @@
 
 <script>
 import AllTags from "./AllTags.vue";
-// import ToggleOrange from "./ToggleOrange.vue";
+import ToggleOrange from "./ToggleOrange.vue";
 import { ToggleButton } from "vue-js-toggle-button";
 import { mapGetters } from "vuex";
 
@@ -92,16 +96,13 @@ export default {
   },
   components: {
     ToggleButton,
-    // ToggleOrange,
+    ToggleOrange,
     AllTags,
   },
   computed: {
-    ...mapGetters(["getTagStatus"]),
+    ...mapGetters(["getTagStatus", "getSelectedTags"]),
   },
   methods: {
-    // testFunction() {
-    //   this.test += "1";
-    // },
     handleVcalendar() {
       const calendarInput = document.querySelector(
         "#app > div > div.page-content >  div.main-content > div.main > div.main-left >  div.tags-container > section.tags-condition > span > input"
@@ -109,20 +110,34 @@ export default {
       calendarInput.style.color = "black";
       calendarInput.value = new Date().toISOString().substring(0, 10);
     },
-    // handleToggleStatus(e) {
-    //   if (e !== undefined) {
-    //     console.log(this.test);
-    //   } else {
-    //     console.log(this.toggleStatus);
-    //   }
-    // },
+    fetchDate() {
+      if (this.date !== null) {
+        const startDate = this.date.start.toISOString().substring(0, 10);
+        const endDate = this.date.end.toISOString().substring(0, 10);
+        this.$store
+          .dispatch("COMPUTE_TAG_DATE", {
+            startDate,
+            endDate,
+          })
+          .then(() => {
+            this.$store.dispatch("FETCH_TAG_STATUS", {
+              tagStatus: this.getTagStatus,
+            });
+          });
+      }
+    },
     fetchToggleStatus(actionType) {
-      this.$store.dispatch("FETCH_TAG_STATUS", {
-        action: actionType === "andOr" ? "andOr" : "stu",
-        type: "",
-        item: actionType === "andOr" ? this.andOr : this.stu,
-      });
-      console.log(this.getTagStatus);
+      this.$store
+        .dispatch("COMPUTE_TAG_STATUS", {
+          action: actionType === "andOr" ? "andOr" : "stu",
+          type: "",
+          item: actionType === "andOr" ? this.andOr : this.stu,
+        })
+        .then(() => {
+          this.$store.dispatch("FETCH_TAG_STATUS", {
+            tagStatus: this.getTagStatus,
+          });
+        });
     },
   },
   mounted() {
@@ -145,11 +160,28 @@ export default {
       .selected-tags {
         width: 100%;
         margin-bottom: 3%;
+        padding: 1%;
+        background-color: #486fff;
+        border: none;
+        border-radius: 3px;
+        border-bottom: 2px solid #919191;
+
+        .selected-tag {
+          width: 140px;
+          margin: 0 10px 10px 0;
+          padding: 1%;
+          background-color: #fff891;
+          border: 1px solid #919191;
+          border-radius: 3px;
+        }
       }
     }
 
     .tags-category {
-      height: 40px;
+      /* border-top: 2px solid #919191; */
+      margin-top: 2%;
+      padding-top: 2%;
+      height: 60px;
       margin-bottom: 3%;
 
       button {

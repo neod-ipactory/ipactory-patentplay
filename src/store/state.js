@@ -11,6 +11,7 @@ export default {
     techTheme: [],
     major: [],
     grade: [],
+    categoryCount: [],
   },
   tagStatus: {
     stu: 0,
@@ -19,5 +20,11 @@ export default {
     tag: '',
     major: '',
     grade: '',
+    date: '',
   },
+  selectedTags: { tagName: [], tagCount: [] },
+  fetchedTags: {
+    listshow: [],
+  },
+  selectedList: [],
 };

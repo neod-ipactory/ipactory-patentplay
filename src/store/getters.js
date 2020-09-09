@@ -32,7 +32,19 @@ export default {
   getGrade(state) {
     return state.tags.grade;
   },
+  getCategoryCount(state) {
+    return state.tags.categoryCount;
+  },
   getTagStatus(state) {
     return state.tagStatus;
+  },
+  getSelectedTags(state) {
+    return state.selectedTags;
+  },
+  getFetchedTags(state) {
+    return state.fetchedTags;
+  },
+  getSelectedList(state) {
+    return state.selectedList;
   },
 };

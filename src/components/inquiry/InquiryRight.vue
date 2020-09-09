@@ -2,7 +2,7 @@
   <div class="main-right">
     <div class="main-right-head">
       <span>총 747건</span>
-      <button>리스트 보기</button>
+      <button @click="lookList">리스트 보기</button>
     </div>
     <section>
       <div class="main-title">공동 경쟁기관 (2건 이상)</div>
@@ -51,7 +51,20 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters } from "vuex";
+
+export default {
+  computed: {
+    ...mapGetters(["getFetchedTags"]),
+  },
+  methods: {
+    lookList() {
+      this.$store.dispatch("FETCH_LIST_SHOW", {
+        listshow: this.getFetchedTags.listshow,
+      });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -73,8 +86,6 @@ export default {};
   }
 
   section {
-    /* margin: 2% auto; */
-
     .main-title {
       margin-top: 5%;
       text-align: center;

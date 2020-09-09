@@ -3,38 +3,44 @@
     <template v-if="major">
       <!-- <button :class="[tagInfo[2] === '0' ? '' : 'zero']" disabled> -->
       <!-- <button :class="{ zero: !Number(tagInfo[2]) }" disabled>{{ tagInfo[0] }} ({{ tagInfo[2] }})</button> -->
-      <ToggleButton @change="fetchTagCode('major')" v-model="toggleStatus" :width="30" :height="15"></ToggleButton>
-      <button :class="{ zero: !Number(tagInfo[1]) }" disabled>{{ tagInfo[0] }} ({{ tagInfo[1] }})</button>
+      <ToggleButton
+        @change="fetchTagCode('major')"
+        v-model="toggleStatus"
+        :width="30"
+        :height="15"
+      ></ToggleButton>
+      <button :class="{ zero: !Number(tagInfo[1]) }" disabled>
+        {{ tagInfo[0] }} ({{ tagInfo[1] }})
+      </button>
     </template>
     <template v-else-if="grade">
-      <ToggleButton @change="fetchTagCode('grade')" v-model="toggleStatus" :width="30" :height="15"></ToggleButton>
-      <button :class="{ zero: !Number(tagInfo[1]) }" disabled>{{ tagInfo[0] }}등급 ({{ tagInfo[1] }})</button>
+      <ToggleButton
+        @change="fetchTagCode('grade')"
+        v-model="toggleStatus"
+        :width="30"
+        :height="15"
+      ></ToggleButton>
+      <button :class="{ zero: !Number(tagInfo[1]) }" disabled>
+        {{ tagInfo[0] }}등급 ({{ tagInfo[1] }})
+      </button>
     </template>
     <template v-else>
-      <ToggleButton @change="fetchTagCode('tag')" v-model="toggleStatus" :width="30" :height="15"></ToggleButton>
-      <button :class="{ zero: !Number(tagInfo[2]) }" disabled>{{ tagInfo[0] }} ({{ tagInfo[2] }})</button>
+      <ToggleButton
+        @change="fetchTagCode('tag')"
+        v-model="toggleStatus"
+        :width="30"
+        :height="15"
+      ></ToggleButton>
+      <button :class="{ zero: !Number(tagInfo[2]) }" disabled>
+        {{ tagInfo[0] }} ({{ tagInfo[2] }})
+      </button>
     </template>
-    <!-- <button
-      v-if="major"
-      :class="{ zero: !Number(tagInfo[1]) }"
-      disabled
-    >{{ tagInfo[0] }} ({{ tagInfo[1] }})</button>
-    <button
-      v-else-if="grade"
-      :class="{ zero: !Number(tagInfo[1]) }"
-      disabled
-    >{{ tagInfo[0] }}등급 ({{ tagInfo[1] }})</button>
-    <button
-      v-else
-      :class="{ zero: !Number(tagInfo[2]) }"
-      disabled
-    >{{ tagInfo[0] }} ({{ tagInfo[2] }})</button>-->
   </div>
 </template>
 
 <script>
-import { ToggleButton } from "vue-js-toggle-button";
-import { mapGetters } from "vuex";
+import { ToggleButton } from 'vue-js-toggle-button';
+import { mapGetters } from 'vuex';
 
 export default {
   data() {
@@ -42,30 +48,27 @@ export default {
       toggleStatus: false,
     };
   },
-  props: ["tagInfo", "major", "grade"],
+  props: ['tagInfo', 'major', 'grade'],
   components: {
     ToggleButton,
   },
   computed: {
-    ...mapGetters(["getTagStatus"]),
+    ...mapGetters(['getTagStatus']),
   },
   methods: {
     fetchTagCode(actionType) {
-      this.$store.dispatch("FETCH_TAG_STATUS", {
-        action: actionType,
-        type: this.toggleStatus === true ? "add" : "remove",
-        item: actionType === "tagCode" ? this.tagInfo[1] : this.tagInfo[0],
-      });
-      console.log(this.getTagStatus);
+      this.$store
+        .dispatch('COMPUTE_TAG_STATUS', {
+          action: actionType,
+          type: this.toggleStatus === true ? 'add' : 'remove',
+          item: actionType === 'tag' ? this.tagInfo[1] : this.tagInfo[0],
+          tagName: this.tagInfo[0],
+          tagCount: actionType === 'tag' ? this.tagInfo[2] : this.tagInfo[1],
+        })
+        .then(() => {
+          this.$store.dispatch('FETCH_TAG_STATUS', { tagStatus: this.getTagStatus });
+        });
     },
-    // fetchTagCode() {
-    //   this.$store.dispatch("FETCH_TAG_STATUS", {
-    //     action: "tagCode",
-    //     type: this.toggleStatus === true ? "add" : "remove",
-    //     item: this.tagInfo[1],
-    //   });
-    //   console.log(this.getTagStatus);
-    // },
   },
 };
 </script>

@@ -1,16 +1,16 @@
 <template>
-  <div class="all-tags">
+  <div v-if="getCategoryCount.length > 0" class="all-tags">
     <section class="tag-container nine">
-      <button class="tag-title" disabled>9T분류({{ this.countTags(getNine) }})</button>
+      <button class="tag-title" disabled>
+        <template>{{ getCategoryCount[0][0] }} ({{ getCategoryCount[0][1] }})</template>
+      </button>
       <div class="tag-wrapper">
         <ToggleAndTag v-for="tag in getNine" :tagInfo="tag" :key="tag[0]"></ToggleAndTag>
       </div>
     </section>
     <section class="tag-container national">
-      <button class="tag-title" disabled>국가표준분류 ({{ this.countTags(getNationalStandard) }})</button>
-      <span
-        class="national-title"
-      >기계 ({{ this.countTags(divideTagCategory(this.getNationalStandard, 0, 16)) }})</span>
+      <button class="tag-title" disabled>국가표준분류</button>
+      <span class="national-title">{{ getCategoryCount[1][0] }} ({{ getCategoryCount[1][1] }})</span>
       <template>
         <div class="tag-wrapper">
           <ToggleAndTag
@@ -20,9 +20,7 @@
           ></ToggleAndTag>
         </div>
       </template>
-      <span
-        class="national-title"
-      >재료 ({{ this.countTags(divideTagCategory(this.getNationalStandard, 16, 25)) }})</span>
+      <span class="national-title">{{ getCategoryCount[2][0] }} ({{ getCategoryCount[2][1] }})</span>
       <template>
         <div class="tag-wrapper">
           <ToggleAndTag
@@ -32,9 +30,7 @@
           ></ToggleAndTag>
         </div>
       </template>
-      <span
-        class="national-title"
-      >화공 ({{ this.countTags(divideTagCategory(this.getNationalStandard, 25, 37)) }})</span>
+      <span class="national-title">{{ getCategoryCount[3][0] }} ({{ getCategoryCount[3][1] }})</span>
       <template>
         <div class="tag-wrapper">
           <ToggleAndTag
@@ -44,9 +40,7 @@
           ></ToggleAndTag>
         </div>
       </template>
-      <span
-        class="national-title"
-      >전기전자 ({{ this.countTags(divideTagCategory(this.getNationalStandard, 37, 49)) }})</span>
+      <span class="national-title">{{ getCategoryCount[4][0] }} ({{ getCategoryCount[4][1] }})</span>
       <template>
         <div class="tag-wrapper">
           <ToggleAndTag
@@ -56,9 +50,7 @@
           ></ToggleAndTag>
         </div>
       </template>
-      <span
-        class="national-title"
-      >정보통신 ({{ this.countTags(divideTagCategory(this.getNationalStandard, 49, 64)) }})</span>
+      <span class="national-title">{{ getCategoryCount[5][0] }} ({{ getCategoryCount[5][1] }})</span>
       <template>
         <div class="tag-wrapper">
           <ToggleAndTag
@@ -68,9 +60,7 @@
           ></ToggleAndTag>
         </div>
       </template>
-      <span
-        class="national-title"
-      >에너지자원 ({{ this.countTags(divideTagCategory(this.getNationalStandard, 64, 72)) }})</span>
+      <span class="national-title">{{ getCategoryCount[6][0] }} ({{ getCategoryCount[6][1] }})</span>
       <template>
         <div class="tag-wrapper">
           <ToggleAndTag
@@ -80,9 +70,7 @@
           ></ToggleAndTag>
         </div>
       </template>
-      <span
-        class="national-title"
-      >원자력 ({{ this.countTags(divideTagCategory(this.getNationalStandard, 72, 83)) }})</span>
+      <span class="national-title">{{ getCategoryCount[7][0] }} ({{ getCategoryCount[7][1] }})</span>
       <template>
         <div class="tag-wrapper">
           <ToggleAndTag
@@ -92,9 +80,7 @@
           ></ToggleAndTag>
         </div>
       </template>
-      <span
-        class="national-title"
-      >환경 ({{ this.countTags(divideTagCategory(this.getNationalStandard, 83, 99)) }})</span>
+      <span class="national-title">{{ getCategoryCount[8][0] }} ({{ getCategoryCount[8][1] }})</span>
       <template>
         <div class="tag-wrapper">
           <ToggleAndTag
@@ -104,9 +90,7 @@
           ></ToggleAndTag>
         </div>
       </template>
-      <span
-        class="national-title"
-      >건설교통 ({{ this.countTags(divideTagCategory(this.getNationalStandard, 99, 112)) }})</span>
+      <span class="national-title">{{ getCategoryCount[9][0] }} ({{ getCategoryCount[9][1] }})</span>
       <template>
         <div class="tag-wrapper">
           <ToggleAndTag
@@ -116,9 +100,7 @@
           ></ToggleAndTag>
         </div>
       </template>
-      <span
-        class="national-title"
-      >생명과학 ({{ this.countTags(divideTagCategory(this.getNationalStandard, 112, 124)) }})</span>
+      <span class="national-title">{{ getCategoryCount[10][0] }} ({{ getCategoryCount[10][1] }})</span>
       <template>
         <div class="tag-wrapper">
           <ToggleAndTag
@@ -128,9 +110,7 @@
           ></ToggleAndTag>
         </div>
       </template>
-      <span
-        class="national-title"
-      >농수산식품 ({{ this.countTags(divideTagCategory(this.getNationalStandard, 124, 145)) }})</span>
+      <span class="national-title">{{ getCategoryCount[11][0] }} ({{ getCategoryCount[11][1] }})</span>
       <template>
         <div class="tag-wrapper">
           <ToggleAndTag
@@ -140,9 +120,7 @@
           ></ToggleAndTag>
         </div>
       </template>
-      <span
-        class="national-title"
-      >보건의료 ({{ this.countTags(divideTagCategory(this.getNationalStandard, 145, 161)) }})</span>
+      <span class="national-title">{{ getCategoryCount[12][0] }} ({{ getCategoryCount[12][1] }})</span>
       <template>
         <div class="tag-wrapper">
           <ToggleAndTag
@@ -154,8 +132,8 @@
       </template>
     </section>
     <section class="tag-container ict">
-      <button class="tag-title" disabled>ICT분류 ({{ this.countTags(getIct) }})</button>
-      <span class="national-title">창조융합 ({{ this.countTags(divideTagCategory(this.getIct, 0, 6)) }})</span>
+      <button class="tag-title" disabled>ICT분류</button>
+      <span class="national-title">{{ getCategoryCount[13][0] }} ({{ getCategoryCount[13][1] }})</span>
       <template>
         <div class="tag-wrapper">
           <ToggleAndTag
@@ -165,7 +143,7 @@
           ></ToggleAndTag>
         </div>
       </template>
-      <span class="national-title">이동통신 ({{ this.countTags(divideTagCategory(this.getIct, 6, 9)) }})</span>
+      <span class="national-title">{{ getCategoryCount[14][0] }} ({{ getCategoryCount[14][1] }})</span>
       <template>
         <div class="tag-wrapper">
           <ToggleAndTag
@@ -175,9 +153,7 @@
           ></ToggleAndTag>
         </div>
       </template>
-      <span
-        class="national-title"
-      >네트워크 ({{ this.countTags(divideTagCategory(this.getIct, 9, 13)) }})</span>
+      <span class="national-title">{{ getCategoryCount[15][0] }} ({{ getCategoryCount[15][1] }})</span>
       <template>
         <div class="tag-wrapper">
           <ToggleAndTag
@@ -187,9 +163,7 @@
           ></ToggleAndTag>
         </div>
       </template>
-      <span
-        class="national-title"
-      >전파위성 ({{ this.countTags(divideTagCategory(this.getIct, 13, 17)) }})</span>
+      <span class="national-title">{{ getCategoryCount[16][0] }} ({{ getCategoryCount[16][1] }})</span>
       <template>
         <div class="tag-wrapper">
           <ToggleAndTag
@@ -199,7 +173,7 @@
           ></ToggleAndTag>
         </div>
       </template>
-      <span class="national-title">방송 ({{ this.countTags(divideTagCategory(this.getIct, 17, 21)) }})</span>
+      <span class="national-title">{{ getCategoryCount[17][0] }} ({{ getCategoryCount[17][1] }})</span>
       <template>
         <div class="tag-wrapper">
           <ToggleAndTag
@@ -209,9 +183,7 @@
           ></ToggleAndTag>
         </div>
       </template>
-      <span
-        class="national-title"
-      >정보보호 ({{ this.countTags(divideTagCategory(this.getIct, 21, 27)) }})</span>
+      <span class="national-title">{{ getCategoryCount[18][0] }} ({{ getCategoryCount[18][1] }})</span>
       <template>
         <div class="tag-wrapper">
           <ToggleAndTag
@@ -221,9 +193,7 @@
           ></ToggleAndTag>
         </div>
       </template>
-      <span
-        class="national-title"
-      >기반SW ({{ this.countTags(divideTagCategory(this.getIct, 27, 30)) }})</span>
+      <span class="national-title">{{ getCategoryCount[19][0] }} ({{ getCategoryCount[19][1] }})</span>
       <template>
         <div class="tag-wrapper">
           <ToggleAndTag
@@ -233,9 +203,7 @@
           ></ToggleAndTag>
         </div>
       </template>
-      <span
-        class="national-title"
-      >융합SW ({{ this.countTags(divideTagCategory(this.getIct, 30, 35)) }})</span>
+      <span class="national-title">{{ getCategoryCount[20][0] }} ({{ getCategoryCount[20][1] }})</span>
       <template>
         <div class="tag-wrapper">
           <ToggleAndTag
@@ -245,9 +213,7 @@
           ></ToggleAndTag>
         </div>
       </template>
-      <span
-        class="national-title"
-      >스마트서비스 ({{ this.countTags(divideTagCategory(this.getIct, 35, 42)) }})</span>
+      <span class="national-title">{{ getCategoryCount[21][0] }} ({{ getCategoryCount[21][1] }})</span>
       <template>
         <div class="tag-wrapper">
           <ToggleAndTag
@@ -257,9 +223,7 @@
           ></ToggleAndTag>
         </div>
       </template>
-      <span
-        class="national-title"
-      >디지털콘텐츠 ({{ this.countTags(divideTagCategory(this.getIct, 42, 46)) }})</span>
+      <span class="national-title">{{ getCategoryCount[22][0] }} ({{ getCategoryCount[22][1] }})</span>
       <template>
         <div class="tag-wrapper">
           <ToggleAndTag
@@ -271,7 +235,10 @@
       </template>
     </section>
     <section class="tag-container techTheme">
-      <button class="tag-title" disabled>기술 Theme({{ this.countTags(getTechTheme) }})</button>
+      <button
+        class="tag-title"
+        disabled
+      >{{ getCategoryCount[23][0] }} ({{ getCategoryCount[23][1] }})</button>
       <div class="tag-wrapper">
         <ToggleAndTag v-for="tag in getTechTheme" :tagInfo="tag" :key="tag[0]"></ToggleAndTag>
       </div>
@@ -304,6 +271,7 @@ export default {
       "getTechTheme",
       "getMajor",
       "getGrade",
+      "getCategoryCount",
     ]),
   },
   methods: {
