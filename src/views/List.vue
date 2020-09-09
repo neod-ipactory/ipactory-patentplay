@@ -4,11 +4,10 @@
     <div class="page-content">
       <SideBar></SideBar>
       <div class="main-content">
-        <span @click="check()" class="list-count"
+        <span class="list-count"
           >총 <span>{{ getSelectedList.length }}</span
           >건</span
         >
-        <!-- {{ getSelectedList[0] }} -->
         <table>
           <tr>
             <th>#</th>
@@ -86,47 +85,28 @@
 <script>
 import Nav from '../components/Nav.vue';
 import SideBar from '../components/SideBar.vue';
-import { mapGetters } from 'vuex';
 
 export default {
-  // data() {
-  //   return {
-  //     getSelectedList: {},
-  //   };
-  // },
-  computed: {
-    ...mapGetters(['getSelectedList', 'getFetchedTags']),
+  data() {
+    return {
+      getSelectedList: [],
+    };
   },
   components: {
     Nav,
     SideBar,
   },
   methods: {
-    check() {
-      console.log(this.getSelectedList);
+    getLocalStorage() {
+      const storageList = JSON.parse(localStorage.getItem('list'));
+      if (storageList) this.getSelectedList = storageList;
     },
-    // lookList() {
-    //   this.$store.dispatch('FETCH_LIST_SHOW', {
-    //     listshow: this.getFetchedTags.listshow,
-    //   });
-    // },
-    // preventUpload() {
-    //   this.$router.push('/');
-    // },
   },
-  // created() {
-  //   const value = localStorage.getItem('list');
-  //   if (value != null) this.getSelectedList = value;
-  //   console.log(this.getSelectedList);
-  // },
-  mounted() {
-    // JSON.parse(localStorage.getItem('list'));
-    // this.lookList();
-    // window.addEventListener('unload', this.preventUpload);
+  beforeCreate() {},
+  created() {
+    this.getLocalStorage();
   },
-  beforeDestroy() {
-    // window.addEventListener('unload', this.preventUpload);
-  },
+  updated() {},
 };
 </script>
 
