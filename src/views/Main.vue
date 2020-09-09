@@ -1,4 +1,4 @@
-script<template>
+<template>
   <div>
     <Nav></Nav>
     <div class="page-content">
@@ -54,7 +54,7 @@ script<template>
           <div class="select-container">
             <select v-model="selectedYear">
               <option disabled>년도</option>
-              <option v-for="year in years" :key="year">{{year}}</option>
+              <option v-for="year in years" :key="year">{{ year }}</option>
             </select>
             <select v-model="selectedMonth">
               <option disabled>월</option>
@@ -70,26 +70,26 @@ script<template>
 </template>
 
 <script>
-import Nav from "../components/Nav.vue";
-import SideBar from "../components/SideBar.vue";
-import LineApplyChart from "../components/chart/LineApplyChart.vue";
-import LineRegisterChart from "../components/chart/LineRegisterChart.vue";
-import ColumnMajorChart from "../components/chart/ColumnMajorChart.vue";
-import ColumnProfessorChart from "../components/chart/ColumnProfessorChart.vue";
-import ColumnCoworkChart from "../components/chart/ColumnCoworkChart.vue";
-import UpdateTable from "../components/UpdateTable.vue";
-import { majors, months } from "../../public/data";
+import Nav from '../components/Nav.vue';
+import SideBar from '../components/SideBar.vue';
+import LineApplyChart from '../components/chart/LineApplyChart.vue';
+import LineRegisterChart from '../components/chart/LineRegisterChart.vue';
+import ColumnMajorChart from '../components/chart/ColumnMajorChart.vue';
+import ColumnProfessorChart from '../components/chart/ColumnProfessorChart.vue';
+import ColumnCoworkChart from '../components/chart/ColumnCoworkChart.vue';
+import UpdateTable from '../components/UpdateTable.vue';
+import { majors, months } from '../../public/data';
 
 export default {
   data() {
     return {
-      dateType: "year",
+      dateType: 'year',
       date: new Date(),
       majors,
       months,
-      selectedMajor: "학과",
-      selectedYear: "년도",
-      selectedMonth: "월",
+      selectedMajor: '학과',
+      selectedYear: '년도',
+      selectedMonth: '월',
     };
   },
   computed: {
@@ -117,7 +117,7 @@ export default {
       if (this.date !== null) {
         const startDate = this.date.start.toISOString().substring(0, 10);
         const endDate = this.date.end.toISOString().substring(0, 10);
-        this.$store.dispatch("FETCH_MAJOR", { startDate, endDate, major });
+        this.$store.dispatch('FETCH_MAJOR', { startDate, endDate, major });
       }
     },
   },
@@ -160,7 +160,7 @@ export default {
       if (this.date !== null) {
         const startDate = this.date.start.toISOString().substring(0, 10);
         const endDate = this.date.end.toISOString().substring(0, 10);
-        this.$store.dispatch("FETCH_CHART_DATA", {
+        this.$store.dispatch('FETCH_CHART_DATA', {
           dateUnit,
           startDate,
           endDate,
@@ -173,9 +173,9 @@ export default {
     },
     handleVcalendar() {
       const calendarInput = document.querySelector(
-        "#app > div > div.page-content > div.main-content > div.graph-container > div.date-picker-container > span > input"
+        '#app > div > div.page-content > div.main-content > div.graph-container > div.date-picker-container > span > input',
       );
-      calendarInput.style.color = "black";
+      calendarInput.style.color = 'black';
       calendarInput.value = new Date().toISOString().substring(0, 10);
     },
     // fetchMajor() {

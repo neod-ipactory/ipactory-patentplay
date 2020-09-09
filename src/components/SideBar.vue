@@ -14,7 +14,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/inquiry" class="nav-link">
               <i class="icon-stack"></i>
               <span>조회</span>
             </a>
@@ -72,6 +72,6 @@ export default {};
 }
 
 .nav-sidebar {
-  position: fixed;
+  /* position: fixed; */
 }
 </style>

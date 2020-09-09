@@ -7,7 +7,7 @@
         <option value="day">일</option>
       </select>
       <div class="date-container">
-        <input v-model="date" type="text" class="form-control daterange-left" @keyup="check()" />
+        <input v-model="date" type="text" class="form-control daterange-left" />
         <span class="input-group-append">
           <span class="input-group-text">
             <i class="icon-calendar22"></i>
@@ -28,9 +28,6 @@ export default {
     };
   },
   methods: {
-    check() {
-      console.log(this.date);
-    },
     emitDate() {
       this.$emit('updateDate', this.dateType, this.date);
     },

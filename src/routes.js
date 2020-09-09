@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Index from './pages/Index.vue';
-import Main from './pages/Main.vue';
+import Index from './views/Index.vue';
+import Main from './views/Main.vue';
+import Inquiry from './views/Inquiry.vue';
 
 Vue.use(VueRouter);
 
@@ -15,6 +16,10 @@ export const router = new VueRouter({
     {
       path: '/main',
       component: Main,
+    },
+    {
+      path: '/inquiry',
+      component: Inquiry,
     },
   ],
 });
