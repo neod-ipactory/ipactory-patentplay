@@ -5,7 +5,6 @@
       <SideBar></SideBar>
       <div class="main-content">
         <div class="graph-container">
-          <!-- <PickDate @updateDate="sendDate"></PickDate> -->
           <div class="date-picker-container">
             <select v-model="dateType" id="select-date">
               <option value="year">연</option>
@@ -102,15 +101,6 @@ export default {
     },
   },
 
-  // computed: {
-  //   defaultDate() {
-  //     let nowDate = new Date().toISOString().substring(0, 10);
-  //     let pastDate =
-  //       nowDate.substr(0, 2) + (parseInt(nowDate.substr(2, 4)) - 1).toString() + nowDate.substr(4);
-  //     let defaultDateValue = nowDate + ' - ' + pastDate;
-  //     return defaultDateValue;
-  //   },
-  // },
   watch: {
     selectedMajor() {
       const major = this.selectedMajor;
@@ -121,20 +111,6 @@ export default {
       }
     },
   },
-  created() {
-    // let nowDate = new Date().toISOString().substring(0, 10);
-    // let pastDate =
-    //   nowDate.substr(0, 2) + (parseInt(nowDate.substr(2, 4)) - 1).toString() + nowDate.substr(4);
-    // let defaultDateValue = pastDate + ' - ' + nowDate;
-    // // this.date = defaultDateValue;
-    // console.log('first', this.date);
-    // this.date = new Date(defaultDateValue);
-    // console.log(this.date);
-    // this.date.start = new Date(pastDate).toISOString();
-    // this.date.end = new Date(nowDate).toISOString();
-    // console.log('last', this.date.start);
-  },
-  // { "start": "2020-08-31T15:00:00.000Z", "end": "2020-09-01T15:00:00.000Z" }
   components: {
     Nav,
     SideBar,
@@ -146,15 +122,6 @@ export default {
     UpdateTable,
   },
   methods: {
-    // fetchDate() {
-    //   var vm = this;
-    //   console.log(vm.dateType, vm.date);
-    // },
-    // fetchDate() {
-    //   const vm = this;
-    //   let fetchData = { dateType: vm.dateType, date: vm.date };
-    //   fetchDateApplyLineChart(fetchData);
-    // },
     fetchDate() {
       let dateUnit = this.dateType;
       if (this.date !== null) {
@@ -165,10 +132,6 @@ export default {
           startDate,
           endDate,
         });
-        // axios
-        //   .get(`${config.chartUrl}${this.dateType}&f_date=${startDate}&e_date=${endDate}`)
-        //   .then((response) => console.log(response.data))
-        //   .catch((error) => console.log(error));
       }
     },
     handleVcalendar() {
@@ -178,26 +141,10 @@ export default {
       calendarInput.style.color = 'black';
       calendarInput.value = new Date().toISOString().substring(0, 10);
     },
-    // fetchMajor() {
-    //   const major = this.selectedMajor;
-    //   if (this.date !== null ) {
-    //     const startDate = this.date.start.toISOString().substring(0, 10);
-    //     const endDate = this.date.end.toISOString().substring(0, 10);
-    //     this.$store.dispatch("FETCH_MAJOR", { startDate, endDate, major });
-    //   }
-    // },
   },
-  //   {
-  //     "f_date":"2010-01-01",
-  //     "e_date":"2015-12-31",
-  //     "major":"정밀화학과"
-  // }
   mounted() {
     this.handleVcalendar();
   },
-  // updated() {
-  //   this.fetchMajor();
-  // },
 };
 </script>
 
@@ -236,16 +183,6 @@ export default {
         border-radius: 3px;
       }
     }
-
-    /* .date-container {
-      width: 230px;
-      margin-left: auto;
-
-      #month-picker,
-      #year-picker {
-        z-index: 1;
-      }
-    } */
 
     h4 {
       text-align: center;

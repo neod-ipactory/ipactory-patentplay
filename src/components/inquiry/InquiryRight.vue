@@ -2,9 +2,7 @@
   <div class="main-right">
     <div class="main-right-head">
       <span>총 {{ getFetchedTags.listshow.length }}건</span>
-      <router-link to="/list">
-        <button @click="lookList" class="list-button">리스트 보기</button>
-      </router-link>
+      <button @click="lookList" class="list-button">리스트 보기</button>
     </div>
     <section>
       <div class="main-title">공동 경쟁기관 (2건 이상)</div>
@@ -61,8 +59,10 @@ export default {
   },
   methods: {
     lookList() {
+      var vm = this;
       this.$store.dispatch('FETCH_LIST_SHOW', {
         listshow: this.getFetchedTags.listshow,
+        vm,
       });
     },
   },
@@ -80,16 +80,11 @@ export default {
     align-items: center;
     font-size: 20px;
 
-    a {
-      width: 18%;
-
-      .list-button {
-        width: 100%;
-        padding: 1%;
-        border: 1px solid #919190;
-        border-radius: 3px;
-        background-color: white;
-      }
+    .list-button {
+      padding: 1%;
+      border: 1px solid #919190;
+      border-radius: 3px;
+      background-color: white;
     }
   }
 
