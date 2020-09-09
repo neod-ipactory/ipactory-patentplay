@@ -6,7 +6,9 @@
         <span v-else>선택된 TAG가 없습니다.</span>
         <div v-if="getSelectedTags.tagName.length > 0" class="selected-tags">
           <!-- 선택된 태그가 있을 공간{{ getSelectedTags }}  -->
-          <button v-for="tag in getSelectedTags.tagName" class="selected-tag" :key="tag">{{ tag }}</button>
+          <button v-for="tag in getSelectedTags.tagName" class="selected-tag" :key="tag">
+            {{ tag }}
+          </button>
         </div>
       </section>
       <section class="tags-category">
@@ -80,10 +82,10 @@
 </template>
 
 <script>
-import AllTags from "./AllTags.vue";
-import ToggleOrange from "./ToggleOrange.vue";
-import { ToggleButton } from "vue-js-toggle-button";
-import { mapGetters } from "vuex";
+import AllTags from './AllTags.vue';
+import ToggleOrange from './ToggleOrange.vue';
+import { ToggleButton } from 'vue-js-toggle-button';
+import { mapGetters } from 'vuex';
 
 export default {
   data() {
@@ -100,14 +102,14 @@ export default {
     AllTags,
   },
   computed: {
-    ...mapGetters(["getTagStatus", "getSelectedTags"]),
+    ...mapGetters(['getTagStatus', 'getSelectedTags']),
   },
   methods: {
     handleVcalendar() {
       const calendarInput = document.querySelector(
-        "#app > div > div.page-content >  div.main-content > div.main > div.main-left >  div.tags-container > section.tags-condition > span > input"
+        '#app > div > div.page-content >  div.main-content > div.main > div.main-left >  div.tags-container > section.tags-condition > span > input',
       );
-      calendarInput.style.color = "black";
+      calendarInput.style.color = 'black';
       calendarInput.value = new Date().toISOString().substring(0, 10);
     },
     fetchDate() {
@@ -115,12 +117,12 @@ export default {
         const startDate = this.date.start.toISOString().substring(0, 10);
         const endDate = this.date.end.toISOString().substring(0, 10);
         this.$store
-          .dispatch("COMPUTE_TAG_DATE", {
+          .dispatch('COMPUTE_TAG_DATE', {
             startDate,
             endDate,
           })
           .then(() => {
-            this.$store.dispatch("FETCH_TAG_STATUS", {
+            this.$store.dispatch('FETCH_TAG_STATUS', {
               tagStatus: this.getTagStatus,
             });
           });
@@ -128,13 +130,13 @@ export default {
     },
     fetchToggleStatus(actionType) {
       this.$store
-        .dispatch("COMPUTE_TAG_STATUS", {
-          action: actionType === "andOr" ? "andOr" : "stu",
-          type: "",
-          item: actionType === "andOr" ? this.andOr : this.stu,
+        .dispatch('COMPUTE_TAG_STATUS', {
+          action: actionType === 'andOr' ? 'andOr' : 'stu',
+          type: '',
+          item: actionType === 'andOr' ? this.andOr : this.stu,
         })
         .then(() => {
-          this.$store.dispatch("FETCH_TAG_STATUS", {
+          this.$store.dispatch('FETCH_TAG_STATUS', {
             tagStatus: this.getTagStatus,
           });
         });
@@ -219,7 +221,7 @@ export default {
     height: 35px;
     display: flex;
     align-items: center;
-    font-size: 15px;
+    font-size: 13px;
     margin-left: auto;
 
     .or {
@@ -265,25 +267,27 @@ export default {
     .toggle-right {
       .toggle-container {
         span {
+          /* width: 200px; */
           margin-left: 3%;
         }
       }
     }
     .toggle-left {
-      width: 210px;
+      width: 240px;
     }
     .toggle-right {
+      /* width: 550px; */
       display: flex;
 
       .toggle-container {
-        width: 90px;
+        width: 95px;
 
         span {
           margin-left: 3%;
         }
 
         &:nth-child(5) {
-          width: 120px;
+          width: 135px;
         }
       }
     }

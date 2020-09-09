@@ -33,15 +33,15 @@ export default {
       .catch((error) => console.log(error));
   },
   FETCH_LIST_SHOW(context, { listshow, vm }) {
+    // FETCH_LIST_SHOW(context, { listshow }) {
     axios
       .post(`${config.basicUrl}list`, { listshow })
       .then(({ data }) => {
-        return (
-          context.commit('SET_LIST_SHOW', data.list),
+        // return console.log(data);
+        context.commit('SET_LIST_SHOW', data.list),
           localStorage.setItem('list', JSON.stringify(data.list)),
           vm.$router.push('/list'),
-          vm.$router.go(vm.$router.currentRoute)
-        );
+          vm.$router.go(vm.$router.currentRoute);
       })
       .catch((error) => console.log(error));
   },

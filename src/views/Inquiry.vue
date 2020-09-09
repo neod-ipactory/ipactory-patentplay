@@ -23,12 +23,12 @@
 </template>
 
 <script>
-import InquiryLeft from "../components/inquiry/InquiryLeft.vue";
-import InquiryRight from "../components/inquiry/InquiryRight.vue";
-import Nav from "../components/Nav.vue";
-import SideBar from "../components/SideBar.vue";
-import axios from "axios";
-import { config } from "../api";
+import InquiryLeft from '../components/inquiry/InquiryLeft.vue';
+import InquiryRight from '../components/inquiry/InquiryRight.vue';
+import Nav from '../components/Nav.vue';
+import SideBar from '../components/SideBar.vue';
+import axios from 'axios';
+import { config } from '../api';
 
 export default {
   components: {
@@ -39,7 +39,7 @@ export default {
   },
   data() {
     return {
-      searchData: "",
+      searchData: '',
     };
   },
   methods: {
@@ -82,7 +82,7 @@ export default {
 
   .main {
     display: flex;
-    font-family: Do Hyeon;
+    font-family: Noto Sans KR;
 
     .vertical-line {
       width: 1px;
