@@ -1,10 +1,8 @@
 import axios from 'axios';
 
 const config = {
-  basicUrl: '//3.129.87.91:8000/',
-  // chartUrl: '//3.129.87.91:8000/chart',
-  // tagUrl: '//3.129.87.91:8000/main',
-  // searchUrl: '//3.129.87.91:8000/keyword',
+  // basicUrl: '//3.129.87.91:8000/',
+  basicUrl: 'http://210.114.17.237:8000/',
   //mock data url
   localHost: 'http://localhost:8081/data/',
 };

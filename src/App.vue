@@ -15,5 +15,6 @@ export default {};
   padding: 0;
   border: 0;
   list-style: none;
+  font-family: Noto Sans KR;
 }
 </style>

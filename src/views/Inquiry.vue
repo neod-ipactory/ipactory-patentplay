@@ -82,7 +82,6 @@ export default {
 
   .main {
     display: flex;
-    font-family: Noto Sans KR;
 
     .vertical-line {
       width: 1px;

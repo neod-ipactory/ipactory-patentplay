@@ -126,7 +126,6 @@ export default {
 .main-content {
   width: 100%;
   padding: 5% 1% 0 1%;
-  font-family: Noto Sans KR;
 
   .list-count {
     font-size: 25px;
