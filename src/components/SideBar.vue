@@ -20,7 +20,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="/regist" class="nav-link">
               <i class="icon-upload"></i>
               <span>신규케이스 등록</span>
             </a>
