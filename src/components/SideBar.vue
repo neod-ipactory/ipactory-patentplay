@@ -72,6 +72,6 @@ export default {};
 }
 
 .nav-sidebar {
-  /* position: fixed; */
+  position: fixed;
 }
 </style>

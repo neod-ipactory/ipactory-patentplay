@@ -4,6 +4,7 @@ import Index from './views/Index.vue';
 import Main from './views/Main.vue';
 import Inquiry from './views/Inquiry.vue';
 import List from './views/List.vue';
+import Regist from './views/Regist.vue';
 
 Vue.use(VueRouter);
 
@@ -25,6 +26,10 @@ export const router = new VueRouter({
     {
       path: '/list',
       component: List,
+    },
+    {
+      path: '/regist',
+      component: Regist,
     },
   ],
 });

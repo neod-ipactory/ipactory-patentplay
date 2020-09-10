@@ -187,7 +187,7 @@ export default {
     h4 {
       text-align: center;
       font-weight: bold;
-      font-family: Do Hyeon, sans-serif;
+      font-family: Noto Sans KR, sans-serif;
       font-size: 40px;
       color: #1b191d;
     }
@@ -228,7 +228,7 @@ export default {
     h4 {
       text-align: center;
       font-weight: bold;
-      font-family: Do Hyeon, sans-serif;
+      font-family: Noto Sans KR, sans-serif;
       font-size: 30px;
     }
 
